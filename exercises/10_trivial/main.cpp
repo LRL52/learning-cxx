@@ -8,11 +8,14 @@ struct FibonacciCache {
 };
 
 // TODO: 实现正确的缓存优化斐波那契计算
-static unsigned long long fibonacci(FibonacciCache &cache, int i) {
-    for (; false; ++cached) {
+static unsigned long long fibonacci(FibonacciCache &fib_cache, int i) {
+    auto &cache = fib_cache.cache;
+    cache[0] = 0;
+    cache[1] = 1;
+    for (auto &cached = fib_cache.cached = 2; cached <= i; ++cached) {
         cache[cached] = cache[cached - 1] + cache[cached - 2];
     }
-    return cache.cache[i];
+    return fib_cache.cache[i];
 }
 
 int main(int argc, char **argv) {
